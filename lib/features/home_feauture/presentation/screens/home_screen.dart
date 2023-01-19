@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           Padding(
                               padding: const EdgeInsets.only(
-                                  top: 50, left: 30, right: 30),
+                                  top: 50, left: 20, right: 30),
                               child: Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.black),
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           left: 20,
                           right: 20,
                         ),
-                        height: 120,
+                        height: 140,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 fit: BoxFit.cover,
@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 16),
+                                      padding: const EdgeInsets.only(top: 20,),
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                           primary: const Color(
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 170, bottom: 50),
+                                      left: 160, bottom: 50),
                                   child: Container(
                                     width: 55,
                                     height: 25,
@@ -190,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 80),
+                            padding: const EdgeInsets.only(top: 20, left: 50),
                             child: Text(
                               'Closing in:',
                               style: TextStyle(
