@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatefulWidget {
@@ -11,7 +8,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  List<int> index = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,15 +45,13 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20, left: 5),
+              padding: const EdgeInsets.only(top: 20, left: 20),
               child: Row(
                 children: [
                   Container(
-                      child: Column(
-                    children:
-                      getFilterchips(),
-
-                  )),
+                    height: 40,
+                    width: 40,
+                  ),
                   Container(
                     height: 150,
                     width: 150,
@@ -66,7 +60,7 @@ class _CartScreenState extends State<CartScreen> {
                             image: AssetImage('assets/images/image5.jpg'))),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 5),
+                    padding: const EdgeInsets.only(left: 20),
                     child: Column(
                       children: [
                         Text(
@@ -80,10 +74,13 @@ class _CartScreenState extends State<CartScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: Text(
-                            '\$140,000',
+                            '140,000',
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
+
+
+
                       ],
                     ),
                   )
@@ -94,32 +91,5 @@ class _CartScreenState extends State<CartScreen> {
         ),
       ),
     );
-  }
-
-  List<Widget> getFilterchips() {
-    List<Widget> chips = [];
-    for (int i = 1; i <= 1; i++) {
-      int randomlable = Random().nextInt(19000);
-      Widget item = FilterChip(
-        pressElevation: 5,
-        showCheckmark: false,
-        avatar: index.contains(i)
-            ? Icon(CupertinoIcons.check_mark_circled_solid, color: Colors.green)
-            : null,
-        label: Container(),
-        onSelected: (value) {
-          setState(() {
-            if (index.contains(i)) {
-              index.remove(i);
-            } else {
-              index.add(i);
-            }
-          });
-        },
-        selected: index.contains(i),
-      );
-      chips.add(item);
-    }
-    return chips;
   }
 }
