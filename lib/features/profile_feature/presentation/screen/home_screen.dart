@@ -12,8 +12,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: SingleChildScrollView(
-          child: Column(
+        child: ListView(
+          children:[ Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,20 +55,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
               Container(
-                  margin: EdgeInsets.only(bottom: 30),
-                  width: 160,
-                  height: 170,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/image6.jpg'))),
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20)),
-                      ),
+                  child:Column(
+                    children: <Widget>[
+                      CircleAvatar(
+                        radius: 50,
+                        backgroundImage: AssetImage('assets/images/image6.jpg'),
+                      )
                     ],
-                  )),
+                  ),),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -285,7 +279,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               )
             ],
-          ),
+          ),]
         ),
       ),
     );
