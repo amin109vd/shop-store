@@ -18,7 +18,7 @@ class _profileState extends State<profile> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new),
           color: Color(0xff00ADB5),
-          onPressed: () {},
+          onPressed: () {Navigator.pop(context);},
         ),
         actions: [
           IconButton(
@@ -95,21 +95,37 @@ class _profileState extends State<profile> {
               SizedBox(
                 height: 35,
               ),
-              Row(
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: OutlinedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              letterSpacing: 2.2,
-                              color: Colors.black),
-                        )),
-                  )
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(horizontal: 50),
+
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20))),
+                    onPressed: () {},
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          letterSpacing: 2.2,
+                          color: Colors.black),
+                    ),
+                  ),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(backgroundColor:Color(0xff00ADB5),
+                          padding: EdgeInsets.symmetric(horizontal: 50),elevation: 2
+                      ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                      onPressed: () {},
+                      child: Text(
+                        'Save',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            letterSpacing: 2.2,
+                            color: Colors.black),
+                      ))
                 ],
               )
             ]),

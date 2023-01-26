@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shoppstore/features/profile_feature/presentation/screen/profile.dart';
+import 'package:shoppstore/features/profile_feature/presentation/screen/wallet.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -54,39 +56,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ],
               ),
-              Container(
-                  child:Column(
-                    children: <Widget>[
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundImage: AssetImage('assets/images/image6.jpg'),
-                      )
-                    ],
-                  ),),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    child: Text(
-                      'Set new profile',
-                      style: TextStyle(color: Colors.black, fontSize: 15),
+              Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 130,
+                      height: 130,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(width: 4),
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          boxShadow: [
+                            BoxShadow(
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: Colors.black.withOpacity(0.1),
+                                offset: Offset(0, 10)),
+                          ],
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage('assets/images/image6.jpg'))),
                     ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Container(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: const Color(0xff00ADB5), // background
-                        onPrimary: Colors.white, // foreground
-                      ),
-                      onPressed: () {},
-                      child: Icon(Icons.add_a_photo_outlined),
-                    ),
-                  )
-                ],
-              ),
+
+                  ],
+                ),
+              ),SizedBox(height: 50,),
+
               Padding(
                 padding: EdgeInsets.only(top: 10),
                 child: Container(
@@ -100,7 +95,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   primary: Colors.white, // background
                   onPrimary: Colors.white, // foreground
                 ),
-                onPressed: () {},
+                onPressed: () {Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const profile()),
+                );},
                 child: Row(
                   children: [
                     Icon(
@@ -112,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       padding: const EdgeInsets.only(left: 10),
                       child: Center(
                         child: Text(
-                          ' Account information',
+                          ' Profile',
                           style: TextStyle(fontSize: 18, color: Colors.black),
                         ),
                       ),
@@ -125,7 +123,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   primary: Colors.white, // background
                   onPrimary: Colors.white, // foreground
                 ),
-                onPressed: () {},
+                onPressed: () {Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Wallet()),
+                );},
                 child: Row(
                   children: [
                     Icon(
@@ -226,7 +227,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Latest purchases',
+                      'Amazing discount',
                       style:
                       TextStyle(color: Colors.black, fontSize: 25),
                     ),
@@ -266,12 +267,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.white, // background
                                 onPrimary:
-                                    const Color(0xff00ADB5), // foreground
+                                const Color(0xff00ADB5), // foreground
                               ),
                               onPressed: () {},
 
-                                child: Image(image: AssetImage(
-                                    'assets/images/image2.jpg')),
+                              child: Image(image: AssetImage(
+                                  'assets/images/image2.jpg')),
 
 
                             ));
