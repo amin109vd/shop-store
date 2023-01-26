@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shoppstore/core/utils/extention.dart';
 import 'package:shoppstore/features/home_feauture/data/data_source/remote/api_provider.dart';
+import 'package:shoppstore/features/home_feauture/presentation/screens/product_detail.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -63,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           Padding(
                               padding: const EdgeInsets.only(
-                                  top: 50, left: 20, right: 30),
+                                  top: 50, left: 30, right: 30),
                               child: Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.black),
@@ -81,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           left: 20,
                           right: 20,
                         ),
-                        height: 140,
+                        height: 120,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 fit: BoxFit.cover,
@@ -102,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 20,),
+                                      padding: const EdgeInsets.only(top: 16),
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                           primary: const Color(
@@ -117,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 160, bottom: 50),
+                                      left: 170, bottom: 50),
                                   child: Container(
                                     width: 55,
                                     height: 25,
@@ -190,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 50),
+                            padding: const EdgeInsets.only(top: 20, left: 80),
                             child: Text(
                               'Closing in:',
                               style: TextStyle(
@@ -245,48 +247,53 @@ class _HomeScreenState extends State<HomeScreen> {
                                 itemCount: 5,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
-                                itemBuilder: (BuildContext contxt, int pos) {
-                                  return Container(
-                                    height: 200,
-                                    width: 150,
-                                    child: Card(
-                                      elevation: 0,
-                                      color: Colors.transparent,
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 130,
-                                            width: 130,
-                                            child: Image(
-                                                image: NetworkImage(snapshot
-                                                    .data![pos].image
-                                                    .toString())),
-                                          ),
-                                          10.toHeight,
-                                          Text(
-                                            snapshot.data![pos].title
-                                                .toString(),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15),
-                                          ),
-                                          5.toHeight,
-                                          Spacer(),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "\$${snapshot.data![pos].price}"
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.black,
-                                                    fontSize: 18),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                itemBuilder: (BuildContext context, int pos) {
+                                  return GestureDetector(
+                                    onTap: (){
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetail(id: snapshot.data![pos].id,),));
+                                    },
+                                    child: Container(
+                                      height: 200,
+                                      width: 150,
+                                      child: Card(
+                                        elevation: 0,
+                                        color: Colors.transparent,
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 130,
+                                              width: 130,
+                                              child: Image(
+                                                  image: NetworkImage(snapshot
+                                                      .data![pos].image
+                                                      .toString())),
+                                            ),
+                                            10.toHeight,
+                                            Text(
+                                              snapshot.data![pos].title
+                                                  .toString(),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15),
+                                            ),
+                                            5.toHeight,
+                                            Spacer(),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "\$${snapshot.data![pos].price}"
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w600,
+                                                      color: Colors.black,
+                                                      fontSize: 18),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   );
@@ -327,45 +334,51 @@ class _HomeScreenState extends State<HomeScreen> {
                            scrollDirection: Axis.horizontal,
                            itemCount: snapshot.data!.length-5,
                            itemBuilder: (context, index) {
-                           return Container(
-                             height: 300,
-                             width: 150,
-                             child: Card(
-                               elevation: 0,
-                               color: Colors.transparent,
-                               child: Column(
-                                 children: [
-                                   SizedBox(
-                                     height: 130,
-                                     width: 130,
-                                     child: Image(
-                                         image: NetworkImage(snapshot
-                                             .data![index+5].image
-                                             .toString())),
-                                   ),
-                                   10.toHeight,
-                                   Text(
-                                     snapshot.data![index+5].title.toString(),
-                                     maxLines: 2,
-                                     overflow: TextOverflow.ellipsis,
-                                     style: TextStyle(
-                                         color: Colors.black, fontSize: 15),
-                                   ),
-                                   5.toHeight,
-                                   Spacer(),
-                                   Row(
-                                     children: [
-                                       Text(
-                                         "\$${snapshot.data![index+5].price}"
-                                             .toString(),
-                                         style: TextStyle(
-                                             fontWeight: FontWeight.w600,
-                                             color: Colors.black,
-                                             fontSize: 18),
-                                       ),
-                                     ],
-                                   ),
-                                 ],
+                           return GestureDetector(
+                             onTap: (){
+                               Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetail(id: snapshot.data![index+5].id),));
+
+                             },
+                             child: Container(
+                               height: 300,
+                               width: 150,
+                               child: Card(
+                                 elevation: 0,
+                                 color: Colors.transparent,
+                                 child: Column(
+                                   children: [
+                                     SizedBox(
+                                       height: 130,
+                                       width: 130,
+                                       child: Image(
+                                           image: NetworkImage(snapshot
+                                               .data![index+5].image
+                                               .toString())),
+                                     ),
+                                     10.toHeight,
+                                     Text(
+                                       snapshot.data![index+5].title.toString(),
+                                       maxLines: 2,
+                                       overflow: TextOverflow.ellipsis,
+                                       style: TextStyle(
+                                           color: Colors.black, fontSize: 15),
+                                     ),
+                                     5.toHeight,
+                                     Spacer(),
+                                     Row(
+                                       children: [
+                                         Text(
+                                           "\$${snapshot.data![index+5].price}"
+                                               .toString(),
+                                           style: TextStyle(
+                                               fontWeight: FontWeight.w600,
+                                               color: Colors.black,
+                                               fontSize: 18),
+                                         ),
+                                       ],
+                                     ),
+                                   ],
+                                 ),
                                ),
                              ),
                            );
