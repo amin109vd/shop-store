@@ -17,6 +17,21 @@ Future<List<ProductModel>> getServer() async {
       }
       return list;
     }
+  Future<List<ProductModel>> getServerProductCategory(category) async {
+    List<ProductModel> list = [];
+    try {
+      var responds = await Dio().get("$baseUrl/products");
+      for (var res in responds.data) {
+        ProductModel model = ProductModel.fromJson(res);
+        if(category==model.category){
+          list.add(model);
+        }
+      }
+    } catch (e) {
+      debugPrint("$e");
+    }
+    return list;
+  }
 
   Future<List> getcategory() async {
     List list = [];

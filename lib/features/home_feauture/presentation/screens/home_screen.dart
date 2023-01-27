@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoppstore/core/utils/extention.dart';
 import 'package:shoppstore/features/home_feauture/data/data_source/remote/api_provider.dart';
+import 'package:shoppstore/features/home_feauture/presentation/screens/category_product.dart';
+import 'package:shoppstore/features/home_feauture/presentation/screens/discount_product.dart';
+import 'package:shoppstore/features/home_feauture/presentation/screens/mos_poular.dart';
 import 'package:shoppstore/features/home_feauture/presentation/screens/product_detail.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -56,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: const EdgeInsets.only(left: 80, top: 50),
                             child: Container(
                               decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black)),
+                              ),
                               child: Icon(
                                 Icons.search,
                                 color: Colors.black,
@@ -68,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   top: 50, left: 30, right: 30),
                               child: Container(
                                 decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black),
+
                                 ),
                                 child: Icon(
                                   Icons.notifications_none_outlined,
@@ -111,7 +114,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                               0xff00ADB5), // background
                                           onPrimary: Colors.white, // foreground
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => DiscountProduct()));
+                                        },
                                         child: Text('See more'),
                                       ),
                                     ),
@@ -154,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 itemCount: snapshot.data!.length,
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
-                                  itemBuilder: (BuildContext contxt, int pos) {
+                                  itemBuilder: (BuildContext context, int pos) {
                                     return Card(
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(
@@ -169,7 +174,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                             onPrimary: const Color(
                                                 0xff00ADB5), // foreground
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => CategoryProduct(id: pos,category: snapshot.data![pos].toString()),));
+
+                                          },
                                           child: Container(
                                             child: Text(snapshot.data![pos].toString()),
                                           ),
@@ -319,7 +327,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const Color(0xff00ADB5), // background
                                   onPrimary: Colors.white, // foreground
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => MostPopular(),));
+                                },
                                 child: Text('See more'),
                               ),
                             )
