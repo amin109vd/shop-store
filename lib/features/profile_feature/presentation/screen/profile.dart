@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoppstore/features/profile_feature/presentation/screen/setting.dart';
 
 class profile extends StatefulWidget {
   const profile({Key? key}) : super(key: key);
@@ -18,13 +19,18 @@ class _profileState extends State<profile> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new),
           color: Color(0xff00ADB5),
-          onPressed: () {Navigator.pop(context);},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         actions: [
           IconButton(
             icon: Icon(Icons.settings),
             color: Color(0xff00ADB5),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => SettingPage()));
+            },
           ),
         ],
       ),
@@ -95,12 +101,12 @@ class _profileState extends State<profile> {
               SizedBox(
                 height: 35,
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
                         padding: EdgeInsets.symmetric(horizontal: 50),
-
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
                     onPressed: () {},
@@ -114,9 +120,12 @@ class _profileState extends State<profile> {
                     ),
                   ),
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(backgroundColor:Color(0xff00ADB5),
-                          padding: EdgeInsets.symmetric(horizontal: 50),elevation: 2
-                      ,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xff00ADB5),
+                          padding: EdgeInsets.symmetric(horizontal: 50),
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))),
                       onPressed: () {},
                       child: Text(
                         'Save',
