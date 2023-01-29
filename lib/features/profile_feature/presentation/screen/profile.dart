@@ -23,16 +23,6 @@ class _profileState extends State<profile> {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.settings),
-            color: Color(0xff00ADB5),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => SettingPage()));
-            },
-          ),
-        ],
       ),
       body: Container(
         child: Padding(
