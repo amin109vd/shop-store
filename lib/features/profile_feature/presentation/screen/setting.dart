@@ -9,6 +9,9 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+  bool newForYou = true;
+  bool accountActivity = true;
+  bool opportunity = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,9 +86,19 @@ class _SettingPageState extends State<SettingPage> {
               SizedBox(
                 height: 10,
               ),
-              buildNotificationOptionRow("New for you", true),
-              buildNotificationOptionRow("Account activity", true),
-              buildNotificationOptionRow("Opportunity", false),
+              buildNotificationOptionRow("New for you", CupertinoSwitch(value: newForYou, onChanged: (val) {
+                setState(() {
+                  newForYou = val;
+                });
+              })), buildNotificationOptionRow("Account activity", CupertinoSwitch(value: accountActivity, onChanged: (val) {
+                setState(() {
+                  accountActivity = val;
+                });
+              })),buildNotificationOptionRow("Opportunity", CupertinoSwitch(value: opportunity, onChanged: (val) {
+                setState(() {
+                  opportunity = val;
+                });
+              })),
               SizedBox(
                 height: 50,
               ),
@@ -158,7 +171,7 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 
-  Row buildNotificationOptionRow(String title, bool isactive) {
+  Row buildNotificationOptionRow(String title,Widget child) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -171,7 +184,8 @@ class _SettingPageState extends State<SettingPage> {
         ),
         Transform.scale(
             scale: 0.7,
-            child: CupertinoSwitch(value: isactive, onChanged: (bool val) {}))
+            child: child
+        )
       ],
     );
   }

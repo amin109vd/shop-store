@@ -1,8 +1,10 @@
-import 'package:dio/dio.dart';
+  import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shoppstore/core/utils/constants.dart';
 import 'package:shoppstore/features/home_feauture/data/model/ProductModel.dart';
 import 'package:shoppstore/features/home_feauture/data/model/Singleproduct.dart';
+
+import '../../../../../core/resources/data_state.dart';
 final String baseUrl = Constants.baseUrl;
 Future<List<ProductModel>> getServer() async {
       List<ProductModel> list = [];
@@ -32,7 +34,21 @@ Future<List<ProductModel>> getServer() async {
     }
     return list;
   }
+  Future<List<ProductModel>> getCartProducts() async {
+    List<ProductModel> list = [];
+    var cart =  cartList;
+    var responds = await Dio().get("$baseUrl/products");
+    for (var res in responds.data) {
+      ProductModel model = ProductModel.fromJson(res);
+      for(var item in cart){
+        if(item[""]==model.id){
+          list.add(model);
+        }
+      }
+    }
 
+    return list;
+  }
   Future<List> getcategory() async {
     List list = [];
     try {
@@ -45,6 +61,7 @@ Future<List<ProductModel>> getServer() async {
     }
     return list;
   }
+
   Future<Singleproduct> getSingleServer(id) async {
 
 

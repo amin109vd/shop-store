@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shoppstore/core/resources/data_state.dart';
 import 'package:shoppstore/core/utils/extention.dart';
 import 'package:shoppstore/features/home_feauture/data/data_source/remote/api_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -58,6 +59,15 @@ class _ProductDetailState extends State<ProductDetail> {
                     child: const Text("Add To Cart"),
                     onPressed: () {
                       setState(() {
+                        cartList.add({
+                          "productId" : snapshot.data!.id,
+                          "quantity" : 1,
+                           "image" : snapshot.data!.image,
+                          "title" : snapshot.data!.title,
+                            "category": snapshot.data!.category,
+                          "price" : snapshot.data!.price,
+
+                        });
                         Get.snackbar("add cart", "This product has been added to the shopping cart");
                         count = 1;
                       });
@@ -77,6 +87,12 @@ class _ProductDetailState extends State<ProductDetail> {
                             ? InkWell(
                             onTap: () {
                               setState(() {
+                                  for(var item in cartList){
+                                    if(item["productId"]==snapshot.data!.id){
+                                      cartList.remove(item);
+                                    }
+                                  }
+
                                 Get.snackbar("remove product", "This product removed from the shopping cart");
 
                                 count = 0;
@@ -91,6 +107,11 @@ class _ProductDetailState extends State<ProductDetail> {
                               setState(() {
                                 if (count > 1) {
                                   count--;
+                                  for(var item in cartList){
+                                    if(item["productId"]==snapshot.data!.id){
+                                      item["quantity"] = count;
+                                    }
+                                  }
                                 }
                               });
                             },
@@ -108,6 +129,11 @@ class _ProductDetailState extends State<ProductDetail> {
                             onTap: () {
                               setState(() {
                                 count++;
+                                for(var item in cartList){
+                                  if(item["productId"]==snapshot.data!.id){
+                                    item["quantity"] = count;
+                                  }
+                                }
                               });
                             },
                             child: Icon(
