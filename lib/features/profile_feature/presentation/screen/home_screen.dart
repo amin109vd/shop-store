@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shoppstore/features/profile_feature/presentation/screen/Support.dart';
+import 'package:shoppstore/features/profile_feature/presentation/screen/favorite.dart';
+import 'package:shoppstore/features/profile_feature/presentation/screen/order.dart';
 import 'package:shoppstore/features/profile_feature/presentation/screen/profile.dart';
+import 'package:shoppstore/features/profile_feature/presentation/screen/setting.dart';
 import 'package:shoppstore/features/profile_feature/presentation/screen/wallet.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -45,7 +49,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           primary: Colors.white, // background
                           onPrimary: const Color(0xff00ADB5), // foreground
                         ),
-                        onPressed: () {},
+                        onPressed: () { Navigator.of(context).push(MaterialPageRoute(
+                            builder: (BuildContext context) => SettingPage()));},
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20)),
@@ -151,7 +156,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   primary: Colors.white, // background
                   onPrimary: Colors.white, // foreground
                 ),
-                onPressed: () {},
+                onPressed: () {Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Order(
+
+                  )),
+                );},
                 child: Row(
                   children: [
                     Icon(
@@ -176,7 +186,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   primary: Colors.white, // background
                   onPrimary: Colors.white, // foreground
                 ),
-                onPressed: () {},
+                onPressed: () {Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Favorite()),
+                );},
                 child: Row(
                   children: [
                     Icon(
@@ -201,7 +214,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   primary: Colors.white, // background
                   onPrimary: Colors.white, // foreground
                 ),
-                onPressed: () {},
+                onPressed: () {Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Support()),
+                );},
                 child: Row(
                   children: [
                     Icon(
