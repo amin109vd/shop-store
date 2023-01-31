@@ -64,7 +64,7 @@ removeProduct(index){
                       centerTitle: true,
                       background: Container(
                         height: 400,
-                        color: Color(0xff6D7993),
+                        color: Color(0xff00ADB5),
                         child: SafeArea(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
