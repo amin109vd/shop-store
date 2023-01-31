@@ -121,11 +121,22 @@ class _Login_pageState extends State<Login_page> {
                     ),
                     squaretile(imagepath: 'assets/image/apple.png'),
                   ],
-                ),const SizedBox(height: 50,),
-                Row(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text('Not a member?'),
-              const SizedBox(width: 4,)
-              , Text('Regester now',style: TextStyle(color: Colors.blue),)],
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Not a member?'),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    Text(
+                      'Regester now',
+                      style: TextStyle(color: Colors.blue),
+                    )
+                  ],
                 )
               ],
             ),
