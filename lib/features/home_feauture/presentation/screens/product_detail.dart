@@ -20,6 +20,9 @@ class ProductDetail extends StatefulWidget {
 
 class _ProductDetailState extends State<ProductDetail> {
   final PageController pageController = PageController();
+  void p(){
+    pageNumber=2;
+  }
   bool text = false;
   bool cart = false;
   bool isLiked = false;
@@ -49,9 +52,13 @@ class _ProductDetailState extends State<ProductDetail> {
           backgroundColor: primaryColor,
           actions: [IconButton(onPressed: (){
             setState(() {
-              pageNumber=2;
+              p();
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (BuildContext context) => RootScreen()),
+                      (Route<dynamic> route) => false
+              );
             });
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RootScreen(),));
           },icon :Icon(Icons.shopping_cart_rounded))],
         ),
         bottomNavigationBar: snapshot.hasData ?
