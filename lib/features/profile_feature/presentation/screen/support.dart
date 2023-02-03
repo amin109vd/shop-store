@@ -22,60 +22,62 @@ class _SupportState extends State<Support> {
           },
         ),
       ),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                height: 200,
-                decoration: BoxDecoration(
-                    border: Border.all(width: 4),
-                    borderRadius: BorderRadius.circular(18),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/images/image7.jpg'))),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  const Text(
-                    'Contact us',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ],
-              ),
-              Divider(
-                height: 15,
-                thickness: 2,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              buildAccountOptionRow(context, "Talk to us"),
-              buildAccountOptionRow(context, "Call to us"),
-              buildAccountOptionRow(context, "About us"),
-              Divider(
-                height: 15,
-                thickness: 2,
-              ),
-              Container(
-                child: Icon(
-                  Icons.store_rounded,
-                  size: 260,
-                  color: Colors.grey,
+      body: SingleChildScrollView(
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 200,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 4),
+                      borderRadius: BorderRadius.circular(18),
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/image7.jpg'))),
                 ),
-              ),Text(
-                'This program was created by Mehdi and Amin. Any illegal and unauthorized use will be prosecuted.',
-                style: TextStyle(color: Colors.grey[600]),
-              ),
-            ],
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      'Contact us',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
+                Divider(
+                  height: 15,
+                  thickness: 2,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                buildAccountOptionRow(context, "Talk to us"),
+                buildAccountOptionRow(context, "Call to us"),
+                buildAccountOptionRow(context, "About us"),
+                Divider(
+                  height: 15,
+                  thickness: 2,
+                ),
+                Container(
+                  child: Icon(
+                    Icons.store_rounded,
+                    size: 260,
+                    color: Colors.grey,
+                  ),
+                ),Text(
+                  'This program was created by Mehdi and Amin. Any illegal and unauthorized use will be prosecuted.',
+                  style: TextStyle(color: Colors.grey[600]),
+                ),
+              ],
+            ),
           ),
         ),
       ),

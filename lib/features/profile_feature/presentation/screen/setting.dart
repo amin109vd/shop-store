@@ -1,5 +1,9 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shoppstore/features/profile_feature/presentation/screen/Setting_AllPage/change_password.dart';
+import 'package:shoppstore/features/profile_feature/presentation/screen/Setting_AllPage/currectpassword.dart';
+import 'package:shoppstore/features/profile_feature/presentation/screen/home_screen.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -55,11 +59,13 @@ class _SettingPageState extends State<SettingPage> {
               SizedBox(
                 height: 10,
               ),
-              buildAccountOptionRow(context, "Changepassword"),
-              buildAccountOptionRow(context, "Content setting"),
-              buildAccountOptionRow(context, "Social"),
-              buildAccountOptionRow(context, "Language"),
-              buildAccountOptionRow(context, "Privecy and security"),
+              buildAccountOptionRow(title: "Changepassword",onpressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CurrectPassword(),));
+              }),
+              buildAccountOptionRow(title: "Content setting",onpressed: (){},),
+              buildAccountOptionRow(title: "Social",onpressed: (){}),
+              buildAccountOptionRow(title: "Language",onpressed: (){}),
+              buildAccountOptionRow(title: "Privecy and security",onpressed: (){}),
               SizedBox(height: 40),
               Row(
                 children: [
@@ -107,56 +113,6 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 
-  GestureDetector buildAccountOptionRow(
-    BuildContext context,
-    String title,
-  ) {
-    return GestureDetector(
-      onTap: () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(title),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text('option1'),
-                    Text('option2'),
-                    Text('option3'),
-                  ],
-                ),
-                actions: [
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('Close'))
-                ],
-              );
-            });
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                  color: Colors.grey[600]),
-            ),
-            Icon(
-              Icons.arrow_forward_ios_outlined,
-              color: Colors.grey,
-            )
-          ],
-        ),
-      ),
-    );
-  }
 
   Row buildNotificationOptionRow(String title, bool isactive) {
     return Row(
@@ -174,5 +130,40 @@ class _SettingPageState extends State<SettingPage> {
             child: CupertinoSwitch(value: isactive, onChanged: (bool val) {}))
       ],
     );
+  }
+}
+class buildAccountOptionRow extends StatefulWidget {
+  const buildAccountOptionRow({Key? key, required this.title,required this.onpressed}) : super(key: key);
+  final String title;
+  final onpressed;
+  @override
+  State<buildAccountOptionRow> createState() => _buildAccountOptionRowState();
+}
+
+class _buildAccountOptionRowState extends State<buildAccountOptionRow> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: widget.onpressed,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              widget.title,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.grey[600]),
+            ),
+            Icon(
+              Icons.arrow_forward_ios_outlined,
+              color: Colors.grey,
+            )
+          ],
+        ),
+      ),
+    );;
   }
 }

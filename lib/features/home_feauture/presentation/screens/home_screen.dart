@@ -4,7 +4,7 @@ import 'package:shoppstore/core/utils/extention.dart';
 import 'package:shoppstore/features/home_feauture/data/data_source/remote/api_provider.dart';
 import 'package:shoppstore/features/home_feauture/presentation/screens/category_product.dart';
 import 'package:shoppstore/features/home_feauture/presentation/screens/discount_product.dart';
-import 'package:shoppstore/features/home_feauture/presentation/screens/mos_poular.dart';
+import 'package:shoppstore/features/home_feauture/presentation/screens/most_popular.dart';
 import 'package:shoppstore/features/home_feauture/presentation/screens/product_detail.dart';
 
 class HomeScreen extends StatefulWidget {
