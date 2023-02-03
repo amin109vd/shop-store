@@ -7,12 +7,13 @@ import '../../../features/profile_feature/presentation/screen/home_screen.dart';
 import '../../../features/search_feature/presentation/screen/home_screen.dart';
 
 class RootScreen extends StatefulWidget {
+  const RootScreen({super.key,});
   @override
   State<RootScreen> createState() => _RootScreenState();
 }
 
 class _RootScreenState extends State<RootScreen> {
-  final PageController _pageController = PageController();
+  PageController _pageController = PageController(initialPage:pageNumber);
   final GlobalKey<CurvedNavigationBarState> key = GlobalKey();
   List<Widget> pages = [
     HomeScreen(),
@@ -34,6 +35,7 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
+    pageNumber=0;
     return Scaffold(
       extendBody: true,
       body: PageView(
@@ -65,3 +67,4 @@ class _RootScreenState extends State<RootScreen> {
     );
   }
 }
+int pageNumber = 0;

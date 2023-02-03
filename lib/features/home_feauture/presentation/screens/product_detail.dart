@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shoppstore/config/color.dart';
 import 'package:shoppstore/core/resources/data_state.dart';
 import 'package:shoppstore/core/utils/extention.dart';
 import 'package:shoppstore/features/home_feauture/data/data_source/remote/api_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../../../core/presentation/screen/root_screen.dart';
 
 class ProductDetail extends StatefulWidget {
   const ProductDetail({Key? key, required this.id}) : super(key: key);
@@ -20,14 +23,37 @@ class _ProductDetailState extends State<ProductDetail> {
   bool text = false;
   bool cart = false;
   bool isLiked = false;
-  int count = 0;
+
+
+
   String _selectedSize = 'S';
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final withd = MediaQuery.of(context).size.width;
-    return FutureBuilder(future: getSingleServer(widget.id),builder: (context, snapshot) {
+    return FutureBuilder(
+
+      future: getSingleServer(widget.id),builder: (context, snapshot) {
+      int id = 0;
+      int quantity = 0;
+      if(snapshot.hasData)
+        cartList.forEach((item) {
+          if (item["productId"] == snapshot.data!.id) {
+            id = item["productId"];
+            quantity = item["quantity"];
+          }
+        });
       return Scaffold(
+        appBar: AppBar(
+          title: const Text("Product Detail"),
+          backgroundColor: primaryColor,
+          actions: [IconButton(onPressed: (){
+            setState(() {
+              pageNumber=2;
+            });
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RootScreen(),));
+          },icon :Icon(Icons.shopping_cart_rounded))],
+        ),
         bottomNavigationBar: snapshot.hasData ?
         Container(
           height: height/12,
@@ -50,7 +76,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ],
                 ),
 
-                count == 0
+                snapshot.data!.id!=id
                     ? ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         textStyle: TextStyle(fontSize: 18),
@@ -69,7 +95,6 @@ class _ProductDetailState extends State<ProductDetail> {
 
                         });
                         Get.snackbar("add cart", "This product has been added to the shopping cart");
-                        count = 1;
                       });
                     })
                     : Container(
@@ -81,46 +106,42 @@ class _ProductDetailState extends State<ProductDetail> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
                       children: [
-                        count == 1
+                        quantity == 1
                             ? InkWell(
                             onTap: () {
                               setState(() {
-                                  for(var item in cartList){
-                                    if(item["productId"]==snapshot.data!.id){
-                                      cartList.remove(item);
-                                    }
-                                  }
 
-                                Get.snackbar("remove product", "This product removed from the shopping cart");
-
-                                count = 0;
+                                cartList.removeWhere((item) => item["productId"] == id);
+                                Get.snackbar(
+                                    "remove product",
+                                    "This product removed from the shopping cart");
                               });
                             },
                             child: Icon(
-                              Icons.remove_shopping_cart_sharp,
+                              Icons
+                                  .remove_shopping_cart_sharp,
                               color: Colors.red,
                             ))
                             : InkWell(
                             onTap: () {
-                              setState(() {
-                                if (count > 1) {
-                                  count--;
-                                  for(var item in cartList){
-                                    if(item["productId"]==snapshot.data!.id){
-                                      item["quantity"] = count;
+                              setState(() {for (var item in cartList) {
+                                  if (item["productId"] == id) {
+                                    if (quantity > 1) {
+                                      item["quantity"]--;
                                     }
                                   }
                                 }
                               });
                             },
                             child: Icon(
-                              Icons.minimize,
+                              Icons.remove,
                               color: Colors.red,
                             )),
                         Text(
-                          "$count",
+                          "${quantity}",
                           style: TextStyle(
                             fontSize: 20,
                           ),
@@ -128,10 +149,11 @@ class _ProductDetailState extends State<ProductDetail> {
                         InkWell(
                             onTap: () {
                               setState(() {
-                                count++;
-                                for(var item in cartList){
-                                  if(item["productId"]==snapshot.data!.id){
-                                    item["quantity"] = count;
+                                for (var item in cartList) {
+                                  if (item["productId"] == id) {
+                                    if (item["quantity"] < 5) {
+                                     item["quantity"]++;
+                                    }
                                   }
                                 }
                               });
@@ -164,22 +186,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ),
                   child: Stack(
                     children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  child: Icon(
-                                    Icons.arrow_back_ios,
-                                    color: Colors.black,
-                                  )),
-                            )),
-                      ),
+
                       Align(
                         alignment: Alignment.topRight,
                         child: InkWell(

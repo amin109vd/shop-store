@@ -24,8 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: FutureBuilder(
         future: getServer(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return SingleChildScrollView(
+          return snapshot.hasError ? Center(child: Text("Something went wrong,please try again later",style: TextStyle(color: Colors.black),),):snapshot.hasData ? SingleChildScrollView(
               controller: pageController,
                   child: Column(
                     children: [
@@ -398,12 +397,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       100.toHeight,
                     ],
                   ),
-                );
-          } else {
-            return Center(
+                ) : Center(
                   child: CircularProgressIndicator(),
                 );
-          }
         },
       ),
     );
