@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shoppstore/core/utils/extention.dart';
 import 'package:shoppstore/features/home_feauture/data/data_source/remote/api_provider.dart';
 import 'package:shoppstore/features/home_feauture/presentation/screens/product_detail.dart';
 import 'package:shoppstore/features/home_feauture/presentation/widget/product_card.dart';
+
+import '../../../../config/color.dart';
 
 class DiscountProduct extends StatefulWidget {
   const DiscountProduct({Key? key}) : super(key: key);
@@ -113,7 +116,8 @@ class _DiscountProductState extends State<DiscountProduct> {
                     }),
                   )
                 : Center(
-                    child: CircularProgressIndicator(),
+                    child:  LoadingAnimationWidget.threeRotatingDots(
+                        color: primaryColor, size: 50),
                   ));
       },
     );

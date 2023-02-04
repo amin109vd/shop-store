@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../features/cart_feature/presentation/screen/cart_screen.dart';
 import '../../../features/home_feauture/presentation/screens/home_screen.dart';
 import '../../../features/profile_feature/presentation/screen/home_screen.dart';
-import '../../../features/search_feature/presentation/screen/home_screen.dart';
+import '../../../features/search_feature/presentation/screen/search_screen.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key,});

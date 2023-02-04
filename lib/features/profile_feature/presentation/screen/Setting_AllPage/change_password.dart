@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shoppstore/features/profile_feature/presentation/screen/home_screen.dart';
 import 'package:shoppstore/features/profile_feature/presentation/screen/setting.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -21,9 +23,9 @@ class _ChangePasswordState extends State<ChangePassword> {
           icon: Icon(Icons.arrow_back_ios_new),
           color: Color(0xff00ADB5),
           onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+            SettingPage widget = SettingPage();
+            Route route = CupertinoPageRoute(builder: (context) => widget, settings:RouteSettings(name: widget.toStringShort()));
+            Navigator.of(context).popUntil((route) => route.settings.name == "SettingPage");          }),
       ),
       body: Container(
         child: Padding(

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shoppstore/config/color.dart';
 import 'package:shoppstore/core/resources/data_state.dart';
 import 'package:shoppstore/core/utils/extention.dart';
@@ -177,7 +178,8 @@ class _ProductDetailState extends State<ProductDetail> {
               ],
             ),
           ),
-        ):Center(child: CircularProgressIndicator(),),
+        ):Center(child:  LoadingAnimationWidget.threeRotatingDots(
+            color: primaryColor, size: 50),),
         body: snapshot.hasData
             ? SingleChildScrollView(
           child: SafeArea(
@@ -463,7 +465,8 @@ class _ProductDetailState extends State<ProductDetail> {
             ),
           ),
         )
-            : Center(child: CircularProgressIndicator()),
+            : Center(child:  LoadingAnimationWidget.threeRotatingDots(
+            color: primaryColor, size: 50),),
       );
     },);
   }
