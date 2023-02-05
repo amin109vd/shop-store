@@ -1,7 +1,7 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shoppstore/features/profile_feature/presentation/screen/Setting_AllPage/currectpassword.dart';
+import 'package:shoppstore/features/profile_feature/presentation/screen/Setting_AllPage/theme_dark&light.dart';
 import 'package:shoppstore/features/profile_feature/presentation/screen/home_screen.dart';
 
 class SettingPage extends StatefulWidget {
@@ -58,13 +58,31 @@ class _SettingPageState extends State<SettingPage> {
               SizedBox(
                 height: 10,
               ),
-              buildAccountOptionRow(title: "Changepassword",onpressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CurrectPassword(),));
-              }),
-              buildAccountOptionRow(title: "Content setting",onpressed: (){},),
-              buildAccountOptionRow(title: "Social",onpressed: (){}),
-              buildAccountOptionRow(title: "Language",onpressed: (){}),
-              buildAccountOptionRow(title: "Privecy and security",onpressed: (){}),
+              buildAccountOptionRow(
+                  title: "Changepassword",
+                  onpressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CurrectPassword(),
+                        ));
+                  }),
+              buildAccountOptionRow(
+                title: "Content setting",
+                onpressed: () {},
+              ),
+              buildAccountOptionRow(
+                  title: "Apptheme",
+                  onpressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Theme_DarkLight(),
+                        ));
+                  }),
+              buildAccountOptionRow(title: "Language", onpressed: () {}),
+              buildAccountOptionRow(
+                  title: "Privecy and security", onpressed: () {}),
               SizedBox(height: 40),
               Row(
                 children: [
@@ -112,7 +130,6 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 
-
   Row buildNotificationOptionRow(String title, bool isactive) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,8 +148,11 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 }
+
 class buildAccountOptionRow extends StatefulWidget {
-  const buildAccountOptionRow({Key? key, required this.title,required this.onpressed}) : super(key: key);
+  const buildAccountOptionRow(
+      {Key? key, required this.title, required this.onpressed})
+      : super(key: key);
   final String title;
   final onpressed;
   @override
@@ -163,6 +183,7 @@ class _buildAccountOptionRowState extends State<buildAccountOptionRow> {
           ],
         ),
       ),
-    );;
+    );
+    ;
   }
 }
