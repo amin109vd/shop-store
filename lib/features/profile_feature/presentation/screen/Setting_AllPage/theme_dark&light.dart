@@ -18,13 +18,41 @@ class _Theme_DarkLightState extends State<Theme_DarkLight> {
       ThemeData(primarySwatch: Colors.red, brightness: Brightness.dark);
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 1,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new),
+          color: Color(0xff00ADB5),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Container(
         child: Center(
-          child: Row(mainAxisAlignment: MainAxisAlignment.center,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-                onPressed: () {},
-                child: Text('Change Theme'),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xff00ADB5),
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20))),
+                onPressed: () {
+                  setState(() {
+                    _iconBool = !_iconBool;
+                  });
+                },
+                child: Text(
+                  'Change Theme',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
               ),
             ],
           ),

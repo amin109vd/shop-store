@@ -19,11 +19,12 @@ class MyApp extends StatelessWidget {
     IconData _iconDark = Icons.nights_stay;
 
     ThemeData _lightTheme = ThemeData(
-        primarySwatch: Colors.cyan, brightness: Brightness.light);
+        primaryColor:  Color(0xff00ADB5), brightness: Brightness.light);
 
     ThemeData _darkTheme = ThemeData(
-      primarySwatch: Colors.red, brightness: Brightness.dark,
+        primaryColor:  Color(0xff00ADB5), brightness: Brightness.dark,
         buttonTheme: const ButtonThemeData(buttonColor: Color(0xff00ADB5)));
+
     return GetMaterialApp(
       theme: _iconBool ? _darkTheme : _lightTheme, home: RootScreen(),);
   }
