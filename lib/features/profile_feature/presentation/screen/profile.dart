@@ -68,7 +68,6 @@ class _profileState extends State<profile> {
                   height: 130,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(width: 4),
                     color: Theme.of(context).scaffoldBackgroundColor,
                     boxShadow: [
                       BoxShadow(
@@ -79,8 +78,7 @@ class _profileState extends State<profile> {
                       ),
                     ],
                     image: imagefile==null ? DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/images/image6.jpg')
+                      image: AssetImage('assets/image/human-face-icon-29.jpg')
 
                     ): DecorationImage(
                         fit: BoxFit.cover,

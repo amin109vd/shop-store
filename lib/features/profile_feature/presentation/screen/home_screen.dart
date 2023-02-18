@@ -37,12 +37,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 5.toWidth,
                 imagefile == null
                     ? CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/image6.jpg'),
-                        radius: 40,
+                  backgroundColor: Colors.white,
+                        backgroundImage: AssetImage('assets/image/human-face-icon-29.jpg'),
+                        radius: 30,
                       )
                     : CircleAvatar(
                         backgroundImage: FileImage(File(imagefile!.path)),
-                        radius: 40,
+                        radius: 30,
                       ),
                 10.toWidth,
                 Text(
