@@ -23,10 +23,9 @@ class _ChangePasswordState extends State<ChangePassword> {
           icon: Icon(Icons.arrow_back_ios_new),
           color: Color(0xff00ADB5),
           onPressed: () {
-            SettingPage widget = SettingPage();
-            Route route = CupertinoPageRoute(builder: (context) => widget, settings:RouteSettings(name: widget.toStringShort()));
-            Navigator.of(context).popUntil((route) => route.settings.name == "SettingPage");          }),
-      ),
+    Navigator.pop(context);
+    Navigator.pop(context);
+          }      ),),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 40, right: 20),

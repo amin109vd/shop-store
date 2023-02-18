@@ -7,6 +7,7 @@ import '../../../../config/color.dart';
 import '../../../../core/utils/extention.dart';
 import '../../../home_feauture/data/data_source/remote/api_provider.dart';
 import '../../../home_feauture/data/model/ProductModel.dart';
+import '../../../home_feauture/presentation/screens/category_product.dart';
 import '../../../home_feauture/presentation/screens/product_detail.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _SearchScreenState extends State<SearchScreen> {
   TextEditingController _searchController = TextEditingController();
   late Future<List<ProductModel>> _future;
   List<ProductModel> _products = [];
-
+  List iconCategory = ["assets/images/electronics.png","assets/images/jewelery.png","assets/images/men's clothing.png","assets/images/women's clothing.png"];
   @override
   void initState() {
     super.initState();
@@ -31,6 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: primaryColor,
         title: Text("Search"),
         actions: <Widget>[
           IconButton(
@@ -44,6 +46,75 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: Column(
         children: <Widget>[
+          FutureBuilder(
+            future: getcategory(),
+            builder: (context, snapshot) {
+              return Padding(
+                padding: EdgeInsets.only(top: 10, left: 0),
+                child: Container(
+                  width: double.infinity,
+                  height: 145,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          10.toWidth,
+                          Text("categories",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
+                        ],
+                      ),
+                      5.toHeight,
+                      Expanded(
+                        child: ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            itemCount: 4,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder:
+                                (BuildContext context,index) {
+                              return GestureDetector(
+                                onTap: (){
+                                  Navigator.of(context)
+                                      .push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        CategoryProduct(
+                                            id: index,
+                                            category: snapshot
+                                                .data![index]
+                                                .toString()),
+                                  ));
+                                },
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                        height: 100,
+                                        width: 100,
+                                        child: Card(
+                                          elevation: 0.9,
+                                          color: Colors.grey.shade200,
+                                          child: Column(
+                                            children: [
+                                              5.toHeight,
+                                              SizedBox(
+                                                height: 80,
+                                                width: 80,
+                                                child: Image.asset(iconCategory[index]),
+                                              ),
+                                            ],
+                                          ),
+                                        )),
+                                    Text(snapshot.hasData ? snapshot.data![index].toString() == "men's clothing" ? "Menswear" : snapshot.data![index].toString() == "women's clothing" ? "ladieswear" : snapshot.data![index].toString():"",style: TextStyle(fontSize: 15,color: Colors.blueGrey,fontWeight: FontWeight.w500),)
+
+                                  ],
+                                ),
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
           Container(
             padding: EdgeInsets.all(8.0),
             child: TextField(

@@ -8,7 +8,7 @@ import 'package:shoppstore/features/home_feauture/presentation/screens/category_
 import 'package:shoppstore/features/home_feauture/presentation/screens/discount_product.dart';
 import 'package:shoppstore/features/home_feauture/presentation/screens/most_popular.dart';
 import 'package:shoppstore/features/home_feauture/presentation/screens/product_detail.dart';
-
+import 'dart:async';
 import '../../data/model/ProductModel.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,6 +20,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final PageController pageController = PageController();
+  int _hours = 8;
+  int _minutes = 0;
+  int _seconds = 0;
+  late Timer _timer;
   @override
   late Future<List<ProductModel>> _future;
   RefreshController _refreshController =
@@ -29,7 +33,24 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _future = getServer();
-  }
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_seconds > 0) {
+          _seconds--;
+        } else if (_minutes > 0) {
+          _minutes--;
+          _seconds = 59;
+        } else if (_hours > 0) {
+          _hours--;
+          _minutes = 59;
+          _seconds = 59;
+        } else {
+          timer.cancel();
+        }
+      });
+    });
+    }
+
 
   void _onRefresh() async {
     // monitor network fetch
@@ -48,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (mounted) setState(() {});
     _refreshController.loadComplete();
   }
-
+List iconCategory = ["assets/images/electronics.png","assets/images/jewelery.png","assets/images/men's clothing.png","assets/images/women's clothing.png"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,10 +78,24 @@ class _HomeScreenState extends State<HomeScreen> {
       body: FutureBuilder(
         future: _future,
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
             if (snapshot.hasError) {
               return Center(
                 child: Text("Error: ${snapshot.error}"),
+              );
+            }
+            if (snapshot.data!.isEmpty||snapshot.data==null) {
+              return SmartRefresher(
+                onRefresh: _onRefresh,
+                onLoading: _onLoading,
+                header: WaterDropMaterialHeader(
+                  color: Colors.white,
+                  backgroundColor: primaryColor,
+                ),
+                controller: _refreshController,
+                child: Center(
+                  child: Text("please chek your interner and try again"),
+                ),
               );
             }
             return SmartRefresher(
@@ -134,81 +169,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    FutureBuilder(
-                      future: getcategory(),
-                      builder: (context, snapshot) {
-                        return snapshot.hasData
-                            ? Padding(
-                                padding: EdgeInsets.only(top: 10, left: 20),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 45,
-                                  child: Center(
-                                    child: ListView.builder(
-                                        itemCount: snapshot.data!.length,
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder:
-                                            (BuildContext context, int pos) {
-                                          return Card(
-                                              shape: RoundedRectangleBorder(
-                                                side: BorderSide(
-                                                  color:
-                                                      const Color(0xff00ADB5),
-                                                  width: 2,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: Colors
-                                                      .white, // background
-                                                  onPrimary: const Color(
-                                                      0xff00ADB5), // foreground
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.of(context)
-                                                      .push(MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CategoryProduct(
-                                                            id: pos,
-                                                            category: snapshot
-                                                                .data![pos]
-                                                                .toString()),
-                                                  ));
-                                                },
-                                                child: Container(
-                                                  child: Text(snapshot
-                                                      .data![pos]
-                                                      .toString()),
-                                                ),
-                                              ));
-                                        }),
-                                  ),
-                                ),
-                              )
-                            : Container();
-                      },
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 20, left: 10,right: 20),
+                        child: Text(
+                          'Flash Sale',
+                          style: TextStyle(
+                              color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500),
+                        ),
+                      ),
                     ),
                     Row(
                       children: [
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 20),
-                            child: Text(
-                              'Flash Sale',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 25),
-                            ),
-                          ),
-                        ),
                         Padding(
                           padding: const EdgeInsets.only(top: 20, left: 80),
                           child: Text(
                             'Closing in:',
-                            style:
-                                TextStyle(color: Colors.black38, fontSize: 16),
+                            style: TextStyle(color: Colors.black38, fontSize: 16),
                           ),
                         ),
                         Padding(
@@ -218,7 +199,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Colors.black12,
                                 borderRadius: BorderRadius.all(Radius.zero)),
                             child: Text(
-                              '08',
+                              '$_hours',
                               style: TextStyle(fontSize: 17),
                             ),
                           ),
@@ -230,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Colors.black12,
                                 borderRadius: BorderRadius.all(Radius.zero)),
                             child: Text(
-                              '25',
+                              '$_minutes',
                               style: TextStyle(fontSize: 17),
                             ),
                           ),
@@ -242,15 +223,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Colors.black12,
                                 borderRadius: BorderRadius.all(Radius.zero)),
                             child: Text(
-                              '16',
+                              '$_seconds',
                               style: TextStyle(fontSize: 17),
                             ),
                           ),
                         ),
                       ],
-                    ),
+                    )
+                  ],
+                ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 20, top: 20),
+                      padding: const EdgeInsets.only(left: 10, top: 20),
                       child: Container(
                         width: double.infinity,
                         height: 220,
@@ -351,7 +334,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 220,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: snapshot.data!.length - 5,
+                          itemCount: 5,
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {

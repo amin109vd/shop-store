@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shoppstore/features/profile_feature/presentation/screen/Setting_AllPage/currectpassword.dart';
 import 'package:shoppstore/features/profile_feature/presentation/screen/Setting_AllPage/theme_dark&light.dart';
 import 'package:shoppstore/features/profile_feature/presentation/screen/home_screen.dart';
+
+import '../../../../config/theme_data/theme/theme_logic.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -12,8 +15,13 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+  bool a = true;
+  bool b = true;
+  bool c = false;
+
   @override
   Widget build(BuildContext context) {
+    final themeController = Get.find<MyThemeController>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -26,6 +34,7 @@ class _SettingPageState extends State<SettingPage> {
           },
         ),
       ),
+
       body: Container(
         child: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, top: 25),
@@ -106,9 +115,22 @@ class _SettingPageState extends State<SettingPage> {
               SizedBox(
                 height: 10,
               ),
-              buildNotificationOptionRow("New for you", true),
-              buildNotificationOptionRow("Account activity", true),
-              buildNotificationOptionRow("Opportunity", false),
+              buildNotificationOptionRow("New for you", CupertinoSwitch(value: a, onChanged: (val) {
+                setState(() {
+                  a=val;
+                });
+              })),
+              buildNotificationOptionRow("Account activity", CupertinoSwitch(value: b, onChanged: (val) {
+                setState(() {
+                  b=val;
+                });
+              })),
+              buildNotificationOptionRow("Opportunity", CupertinoSwitch(value: c, onChanged: (val) {
+                setState(() {
+                  c=val;
+                });
+              })),
+
               SizedBox(
                 height: 50,
               ),
@@ -130,7 +152,7 @@ class _SettingPageState extends State<SettingPage> {
     );
   }
 
-  Row buildNotificationOptionRow(String title, bool isactive) {
+  Row buildNotificationOptionRow(String title,Widget sw) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -143,7 +165,7 @@ class _SettingPageState extends State<SettingPage> {
         ),
         Transform.scale(
             scale: 0.7,
-            child: CupertinoSwitch(value: isactive, onChanged: (bool val) {}))
+            child: sw)
       ],
     );
   }
@@ -187,3 +209,4 @@ class _buildAccountOptionRowState extends State<buildAccountOptionRow> {
     ;
   }
 }
+bool d = false;

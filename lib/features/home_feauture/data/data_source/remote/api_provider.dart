@@ -51,14 +51,11 @@ Future<List<ProductModel>> getServer() async {
   }
   Future<List> getcategory() async {
     List list = [];
-    try {
-      var responds = await Dio().get("$baseUrl/products/categories");
+
+      var responds = await Dio().get("https://fakestoreapi.com/products/categories");
       for (var res in responds.data) {
         list.add(res);
       }
-    } catch (e) {
-      debugPrint("$e");
-    }
     return list;
   }
 

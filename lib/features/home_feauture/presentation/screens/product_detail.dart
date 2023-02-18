@@ -12,9 +12,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../../core/presentation/screen/root_screen.dart';
 
 class ProductDetail extends StatefulWidget {
-  const ProductDetail({Key? key, required this.id}) : super(key: key);
+  const ProductDetail({Key? key, required this.id, this.discount}) : super(key: key);
   final id;
-
+final discount;
   @override
   State<ProductDetail> createState() => _ProductDetailState();
 }
@@ -27,7 +27,6 @@ class _ProductDetailState extends State<ProductDetail> {
   bool text = false;
   bool cart = false;
   bool isLiked = false;
-
 
 
   String _selectedSize = 'S';
@@ -67,20 +66,38 @@ class _ProductDetailState extends State<ProductDetail> {
           height: height/12,
           color: Colors.white,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Text("pr"),
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: Text("\$${snapshot.data!.price.toString()}",
-                          style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.w600)),
+                    Container(
+                      child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "\$${snapshot.data!.price}"
+                                  .toString(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.grey,
+                                  fontSize: 18),
+                            ),
+                          ),
+                          Align(alignment: Alignment.centerLeft,child: Text("--------",style: TextStyle(color: Colors.grey,fontSize: 20),)),
+                        ],
+                      ),
                     ),
-
+                    Text(
+                      "\$${snapshot.data!.price!/2}"
+                          .toString(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                          fontSize: 24),
+                    ),
                   ],
                 ),
 
@@ -99,7 +116,7 @@ class _ProductDetailState extends State<ProductDetail> {
                            "image" : snapshot.data!.image,
                           "title" : snapshot.data!.title,
                             "category": snapshot.data!.category,
-                          "price" : snapshot.data!.price,
+                          "price" : widget.discount==null?snapshot.data!.price:snapshot.data!.price!/2,
 
                         });
                         Get.snackbar("add cart", "This product has been added to the shopping cart");

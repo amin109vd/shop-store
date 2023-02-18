@@ -37,7 +37,7 @@ class _DiscountProductState extends State<DiscountProduct> {
                         padding: const EdgeInsets.all(10.0),
                         child: GestureDetector(
                           onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetail(id: snapshot.data![index].id,),));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProductDetail(id: snapshot.data![index].id,discount: true,),));
                           },
                           child:Container(
                             padding: EdgeInsets.all(10),
